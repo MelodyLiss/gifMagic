@@ -1,0 +1,13 @@
+@use '../assets/css/variables.scss' as v;
+
+form{
+    display: flex;
+    justify-content: center;
+    input{
+        width:100vh ;
+        padding: 1rem;
+        border-radius: 20px;
+        border: 0.3rem solid v.$primary-color;
+        margin: 2rem;
+    }
+}

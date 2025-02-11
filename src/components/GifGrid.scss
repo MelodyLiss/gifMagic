@@ -1,0 +1,81 @@
+@use '../assets/css/variables.scss' as v;
+
+.category-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 180vh;
+    margin: auto;
+    margin-bottom: 6rem;
+    margin-top: 3rem;
+    background-color: var(--background-color); 
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);   
+
+    .category-header {
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: v.$secondary_font;
+        color: v.$black-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        --r: .8em;
+        position: absolute;
+        top: 20px;
+        inset-inline: calc(-1*var(--r));
+        line-height: 1.8;
+        padding: .2em .5em calc(1.5*var(--r));
+        border-radius: var(--r);
+        
+        /* Gradiente utilizando la variable de color de la cinta */
+        --_g: 100%/var(--r) calc(2*var(--r)) no-repeat;
+        background:
+            radial-gradient(100% 50% at right, #0005 98%, #0000 101%) 0 var(--_g),
+            radial-gradient(100% 50% at left, #0005 98%, #0000 101%) 100% var(--_g),
+            conic-gradient(from 90deg at var(--r) calc(100% - 2*var(--r)), #0000 25%, var(--header-color) 0) 0 0/calc(100% - var(--r)) 100%;
+        
+        i {
+            margin-left: 1rem;
+            &:hover{
+                
+                transform: scale(1.2) rotate(-4deg);
+
+            }
+        }
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+    .card-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        max-width: 1500px;
+        margin: 0 auto;
+        margin-top: 130px;
+        padding: 2rem;
+        
+    }
+
+    .add-more-button {
+        width: 25%;
+        margin: auto;
+        margin-bottom: 3rem;
+        padding: 1rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: v.$black-color;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: scale(1.2);
+            box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+    }
+}
