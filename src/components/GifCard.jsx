@@ -4,14 +4,16 @@ import './Gifcard.scss'
 export const GifCard = ({ img, title, url, onRemove }) => {
     const [copied, setCopied] = useState(false);
 
-    const handleCopyUrl = async () => {
-        try {
-            await navigator.clipboard.writeText(url);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000); // El mensaje desaparecerá después de 2 segundos
-        } catch (err) {
-            console.error('Error al copiar la URL:', err);
-        }
+    const handleCopyUrl = () => {
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     return (
@@ -22,7 +24,7 @@ export const GifCard = ({ img, title, url, onRemove }) => {
                 onClick={handleCopyUrl}
                 style={{ cursor: 'pointer' }}
             />
-            <div >
+            <div>
                 <p>{title}</p>
                 <i className="fa-solid fa-delete-left" onClick={onRemove}></i>
             </div>

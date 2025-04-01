@@ -1,13 +1,62 @@
 @use '../assets/css/variables.scss' as v;
 
-form{
+form {
     display: flex;
     justify-content: center;
-    input{
-        width:100vh ;
-        padding: 1rem;
+    align-items: center;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    input {
+        width: 300px;
+        padding: 1.2rem 2rem;
         border-radius: 20px;
         border: 0.3rem solid v.$primary-color;
-        margin: 2rem;
+        margin: 1rem;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(v.$primary-color, 0.5);
+        }
+
+        &::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}
+
+@media (min-width: v.$desktop) {
+    form {
+        input {
+            width: 800px;
+        }
+    }
+}
+
+@media (min-width: v.$tablet) {
+    form {
+        input {
+            width: 600px;
+            padding: 1.2rem 2rem;
+            margin: 1rem;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@media (max-width: v.$telefono) {
+    form {
+        padding: 0 0.3rem;
+        
+        input {
+            width: 260px;
+            padding: 0.8rem 1.2rem;
+            margin: 0.5rem;
+            font-size: 1rem;
+        }
     }
 }
