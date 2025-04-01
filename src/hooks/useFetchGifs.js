@@ -1,41 +1,36 @@
 import { useState, useEffect } from "react";
 import { getGifs } from "../helpers/getGifs";
 
-export const useFetchGifs = (category, setStoredImages) => {
+export const useFetchGifs = (category) => {
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [offset, setOffset] = useState(0);
 
     useEffect(() => {
         const fetchGifs = async () => {
             setIsLoading(true);
-            const newImages = await getGifs(category);
+            const newImages = await getGifs(category, 0, 10);
             setImages(newImages);
-            setStoredImages(newImages); // Guardar en localStorage
+            setOffset(10);
             setIsLoading(false);
         };
 
         fetchGifs();
-    }, [category]); // ❌ Eliminamos `setStoredImages` de las dependencias
+    }, [category]);
 
     const addMoreGifs = async () => {
         setIsLoading(true);
-        const newImages = await getGifs(category);
-
-        setImages((prevImages) => {
-            const updatedImages = [...prevImages, ...newImages];
-            setStoredImages(updatedImages); // Guardar en localStorage
-            return updatedImages;
-        });
-
+        const newImages = await getGifs(category, offset, 10);
+        
+        setImages(prevImages => [...prevImages, ...newImages]);
+        setOffset(prevOffset => prevOffset + 10);
         setIsLoading(false);
+        
+        return newImages;
     };
 
     const removeGif = (id) => {
-        setImages((prevImages) => {
-            const updatedImages = prevImages.filter(img => img.id !== id);
-            setStoredImages(updatedImages); // Guardar en localStorage
-            return updatedImages;
-        });
+        setImages(prevImages => prevImages.filter(img => img.id !== id));
     };
 
     return { images, isLoading, removeGif, addMoreGifs };

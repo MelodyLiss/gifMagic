@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AddCategory } from './components/AddCategory';
 import { GifGrid } from './components/GifGrid';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -8,11 +8,15 @@ import logo from '../src/assets/img/logo_pag.png';
 
 export const GifMagic = () => {
     const [categories, setCategories] = useLocalStorage('categories', []);
+    const [error, setError] = useState('');
 
     const onAddCategory = (newCategory) => {
         if (categories.includes(newCategory)) {
-            return console.log(`${newCategory} ya existe`);
+            setError(`${newCategory} ya existe`);
+            setTimeout(() => setError(''), 3000); 
+            return;
         }
+        setError('');
         setCategories([newCategory, ...categories]);
     };
 
@@ -24,7 +28,10 @@ export const GifMagic = () => {
         <>
             <header>
                 <img className='imglogo' src={logo} alt="" />
-                <AddCategory onNewCategory={onAddCategory} />
+                <div className="category-header">
+                    <AddCategory onNewCategory={onAddCategory} />
+                </div>
+                {error && <div className="error-message">{error}</div>}
             </header>
 
             <main>
@@ -38,7 +45,10 @@ export const GifMagic = () => {
             </main>
 
             <footer>
-                <p>Elaborado por Melody.Dev 🍊🧡</p>
+                <p>Elaborado por </p>
+                <a href="https://www.linkedin.com/in/melodydev" target="_blank" rel="noopener noreferrer">
+                <p> Melody.Dev🍊🧡</p>
+                </a>
             </footer>
         </>
     );

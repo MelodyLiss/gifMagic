@@ -1,13 +1,19 @@
 @use 'variables' as v;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     box-sizing: border-box;
-    font-family: v.$primary_font , sans-serif;
+    font-family: v.$primary_font, sans-serif;
     font-size: 0.8rem;
     color: v.$black_color;
     text-align: center;
+    min-height: 100vh;
 }
-
 
 *,
 *::before,
@@ -15,15 +21,104 @@ html {
     box-sizing: inherit;
 }
 
-
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: #e5e5f7;
     opacity: 1;
     background-image: linear-gradient(#61b2e9 1.1px, transparent 1.1px), linear-gradient(to right, #61b2e9 1.1px, #e5e5f7 1.1px);
     background-size: 22px 22px;
-
 }
 
+#root {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .imglogo {
+        width: 80%;
+        max-width: 800px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .category-header {
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: v.$secondary_font;
+        color: v.$black-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        --r: .8em;
+        position: relative;
+        top: 20px;
+        inset-inline: calc(-1*var(--r));
+        line-height: 1.8;
+        padding: .2em .5em calc(1.5*var(--r));
+        border-radius: var(--r);
+        
+        /* Gradiente utilizando la variable de color de la cinta */
+        --_g: 100%/var(--r) calc(2*var(--r)) no-repeat;
+        background:
+            radial-gradient(100% 50% at right, #0005 98%, #0000 101%) 0 var(--_g),
+            radial-gradient(100% 50% at left, #0005 98%, #0000 101%) 100% var(--_g),
+            conic-gradient(from 90deg at var(--r) calc(100% - 2*var(--r)), #0000 25%, var(--header-color) 0) 0 0/calc(100% - var(--r)) 100%;
+        
+        i {
+            margin-left: 1rem;
+            &:hover {
+                transform: scale(1.2) rotate(-4deg);
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: v.$primary-color;
+    color: v.$white-color;
+    padding: 1rem;
+    margin-top: auto;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+
+    p {
+        margin: 0;
+        font-size: 1rem;
+        margin-right: 0.5rem;
+    }
+
+    a {
+        text-decoration: none;
+        color: v.$white-color;
+        &:hover {
+            color: rgba(219, 94, 11, 0.986);
+        }
+    }
+}
 
 ul {
     li {
@@ -35,8 +130,25 @@ ul {
         }
     }
 }
-footer{
-    background-color: v.$primary-color;
-    color: v.$white-color;
-    padding: 1rem;
+
+.error-message {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
