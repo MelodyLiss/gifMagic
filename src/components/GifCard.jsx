@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import './Gifcard.scss'
+import './GifCard.scss'
+
 
 export const GifCard = ({ img, title, url, onRemove }) => {
     const [copied, setCopied] = useState(false);
