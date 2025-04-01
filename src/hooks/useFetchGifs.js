@@ -9,6 +9,17 @@ export const useFetchGifs = (category) => {
     useEffect(() => {
         const fetchGifs = async () => {
             setIsLoading(true);
+            // Intentar obtener los GIFs guardados del localStorage
+            const storedGifs = localStorage.getItem(`gifs-${category}`);
+            if (storedGifs) {
+                const parsedGifs = JSON.parse(storedGifs);
+                setImages(parsedGifs);
+                setOffset(parsedGifs.length);
+                setIsLoading(false);
+                return;
+            }
+
+            // Si no hay GIFs guardados, hacer la petición
             const newImages = await getGifs(category, 0, 10);
             setImages(newImages);
             setOffset(10);
