@@ -66,13 +66,9 @@ header {
         line-height: 1.8;
         padding: .2em .5em calc(1.5*var(--r));
         border-radius: var(--r);
+
         
-        /* Gradiente utilizando la variable de color de la cinta */
-        --_g: 100%/var(--r) calc(2*var(--r)) no-repeat;
-        background:
-            radial-gradient(100% 50% at right, #0005 98%, #0000 101%) 0 var(--_g),
-            radial-gradient(100% 50% at left, #0005 98%, #0000 101%) 100% var(--_g),
-            conic-gradient(from 90deg at var(--r) calc(100% - 2*var(--r)), #0000 25%, var(--header-color) 0) 0 0/calc(100% - var(--r)) 100%;
+      
         
         i {
             margin-left: 1rem;
